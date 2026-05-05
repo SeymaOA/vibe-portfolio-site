@@ -29,11 +29,43 @@ Use this file so AI assistants (and future you) stay aligned with the **Code Pla
 | Astro + pages (Home, About, Projects) | Done |
 | Tailwind installed | Done |
 | Local preview (`npm run dev`) | You run |
-| Git + GitHub | Run `git init` / push from repo root (see parent folder) |
+| Git + GitHub | Local repo + `main` branch done — **you** run `gh auth login` + create remote (below) |
 | Cloudflare Pages + Git connect | Use dashboard; root `web`, output `dist` |
 | Newsletter wired to API | Set env vars above |
 | Image in `public/` + hero | Placeholder SVG + swap path |
 | Deploy / live URL | After `site` + hosting |
+
+## Connect GitHub (only you can do this — login required)
+
+An automated assistant **cannot** log into your GitHub account or push without your credentials.
+
+**GitHub CLI** (`gh`) should live at `C:\Program Files\GitHub CLI\gh.exe` if it was installed via Winget.
+
+1. Open **PowerShell** or **Command Prompt** and log in (browser flow):
+
+   ```bash
+   gh auth login
+   ```
+
+   Choose GitHub.com → HTTPS → authenticate via browser.
+
+2. From the repo root (`VIBE-PORTFOLIO-SITE`, where `.git` lives), create the remote repo and push:
+
+   ```bash
+   cd path\to\VIBE-PORTFOLIO-SITE
+   gh repo create vibe-portfolio-site --public --source=. --remote=origin --push
+   ```
+
+   Use another repo name if `vibe-portfolio-site` is taken. Add `--private` instead of `--public` if you prefer.
+
+3. If the repo already exists on GitHub instead:
+
+   ```bash
+   git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+   git push -u origin main
+   ```
+
+**Cloudflare Pages** must be connected in the Cloudflare dashboard (import Git repository). No one can do that for your account without your Cloudflare login.
 
 ## Scripts
 
