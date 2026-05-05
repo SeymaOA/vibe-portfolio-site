@@ -1,0 +1,47 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path under `public/`, e.g. `/hero.svg` */
+  ogImage?: string;
+}
+
+const { title, description = 'Portfolio — bold, minimal.', ogImage = '/hero.svg' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogUrl = canonical.href;
+const socialImage = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=khand@400,500,600,700&f[]=switzer@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="page">
+    <slot />
+  </body>
+</html>

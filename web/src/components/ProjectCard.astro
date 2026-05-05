@@ -1,0 +1,120 @@
+---
+export interface ProjectCardProps {
+  title: string;
+  description: string;
+  status: string;
+  tools: string[];
+  href?: string;
+  ctaLabel?: string;
+  /** Use `3` under an `h2` section (e.g. featured on Home). Default `2` under page `h1`. */
+  titleLevel?: 2 | 3;
+}
+
+const {
+  title,
+  description,
+  status,
+  tools,
+  href = '#',
+  ctaLabel = 'Learn more',
+  titleLevel = 2,
+} = Astro.props as ProjectCardProps;
+
+const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
+---
+
+<article class="project-card">
+  <div class="project-card__top">
+    <TitleTag class="project-card__title">{title}</TitleTag>
+    <span class="project-card__status">{status}</span>
+  </div>
+  <p class="project-card__desc">{description}</p>
+  <ul class="project-card__tools" aria-label="Tools">
+    {tools.map((t) => (
+      <li>
+        <span class="tag tag--accent">{t}</span>
+      </li>
+    ))}
+  </ul>
+  <a class="project-card__cta" href={href}>{ctaLabel}</a>
+</article>
+
+<style>
+  .project-card {
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .project-card__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .project-card__title {
+    font-size: var(--step-3);
+    margin: 0;
+  }
+
+  .project-card__status {
+    font-family: var(--font-display);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .project-card__desc {
+    margin: 0;
+    font-size: var(--step-1);
+    color: var(--color-text-muted);
+    max-width: none;
+    flex: 1;
+  }
+
+  .project-card__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project-card__cta {
+    align-self: flex-start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
+    color: var(--color-accent);
+  }
+
+  .project-card__cta:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+
+  .project-card__cta:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+</style>

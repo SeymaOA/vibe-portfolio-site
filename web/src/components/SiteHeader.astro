@@ -1,0 +1,71 @@
+---
+const path = Astro.url.pathname;
+const link = (href: string) => (path === href ? 'nav__link is-active' : 'nav__link');
+---
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="site-header__mark" href="/">Portfolio</a>
+    <nav class="nav" aria-label="Primary">
+      <a class={link('/')} href="/">Home</a>
+      <a class={link('/about')} href="/about">About</a>
+      <a class={link('/projects')} href="/projects">Projects</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .site-header__mark {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .site-header__mark:hover {
+    color: var(--color-accent);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .nav :global(.nav__link) {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .nav :global(.nav__link:hover) {
+    color: var(--color-text);
+  }
+
+  .nav :global(.nav__link.is-active) {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+</style>

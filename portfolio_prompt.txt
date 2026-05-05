@@ -1,0 +1,46 @@
+Prompt: Minimal Astro portfolio (bold, minimal)
+Goal
+Build a bold, minimal portfolio website as a static site (no backend). Use Astro as the framework (preferred over SvelteKit or Next.js for this project). Deploy to Cloudflare Pages.
+
+Tech stack
+
+Framework: Astro (static output where appropriate).
+Hosting: Cloudflare Pages.
+Backend: None for now; no server routes required for core behavior.
+Design: Strict black and white palette with one accent color: red (links, primary buttons, focus states).
+Typography: Load fonts via Fontshare (global layout should include the Fontshare stylesheet/link and sensible font choices).
+Site structure
+
+Three main pages: Home, About, Projects (clear routes and navigation).
+Global layout that wraps all pages and includes:
+Fontshare integration
+Shared styles for the design system (spacing, type scale, colors, red accent usage)
+Consistent header/nav and footer (or minimal nav—whatever fits “bold minimal”)
+Newsletter
+
+Add a Newsletter section (e.g. on Home or in the footer—your choice, but document it).
+Implement a simple client-side email capture form only: email input + Subscribe button, styled with the red accent.
+Use plain HTML form markup; no ESP embed, no API calls, no backend wiring yet—the user will connect submission logic later (e.g. action/method placeholder or a note in code comments is fine).
+SEO and discoverability
+
+SEO meta tags per page: title, description, Open Graph (and Twitter/X cards if reasonable), canonical URL pattern suitable for static hosting.
+Sitemap: Integrate Astro’s sitemap solution (e.g. @astrojs/sitemap or current recommended approach) so a sitemap is generated at build time.
+robots.txt if appropriate for the same deployment setup.
+Cloudflare Pages
+
+Provide deployment-oriented config: e.g. build command, output directory, Node version if needed, and any Wrangler / Pages notes.
+Add npm scripts in package.json for local dev and production build; mention anything Cloudflare Pages should use in the dashboard.
+Content
+
+Use placeholder copy for About and Projects so the user can replace text later.
+Home should introduce the portfolio briefly and include the newsletter section.
+Deliverables
+
+Proposed file/folder structure (src/pages, layouts, components, global CSS).
+Complete enough that npm install, npm run dev, and npm run build work.
+Short README with: how to run locally, build, and deploy to Cloudflare Pages (high level).
+Constraints
+
+Keep the UI minimal and bold (strong typography, restraint on decoration).
+Prefer accessible markup (labels for inputs, focus styles using red accent).
+Do not add a backend, database, or third-party newsletter service integration unless explicitly stubbed with comments only.

@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+
+/* --------------------------------------------------------------------------
+   Global design system — black / white / single red accent
+   Headings: Khand · Body: Switzer (loaded in BaseLayout via Fontshare)
+   Tailwind utilities work alongside these tokens (see Astro styling guide).
+   -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces & ink */
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f7f7f7;
+  --color-text: #0a0a0a;
+  --color-text-muted: #404040;
+  --color-border: #e5e5e5;
+
+  /* One accent — use sparingly (CTAs, focus, tags, thin rules) */
+  --color-accent: #d90429;
+  --color-accent-hover: #b80321;
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
+
+  /* Typography */
+  --font-display: 'Khand', system-ui, sans-serif;
+  --font-body: 'Switzer', system-ui, sans-serif;
+
+  /* Type scale (fluid where helpful) */
+  --step--1: clamp(0.875rem, 0.82rem + 0.2vw, 0.9375rem);
+  --step-0: clamp(1rem, 0.92rem + 0.35vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1rem + 0.55vw, 1.25rem);
+  --step-2: clamp(1.375rem, 1.15rem + 1vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.35rem + 1.65vw, 2.25rem);
+  --step-4: clamp(2.25rem, 1.65rem + 2.5vw, 3.25rem);
+  --step-5: clamp(3rem, 2rem + 4vw, 4.5rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-body: 1.55;
+  --tracking-tight: -0.02em;
+
+  /* Layout */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.75rem;
+  --space-xl: 2.75rem;
+  --space-2xl: 4rem;
+  --space-3xl: clamp(4rem, 8vw, 7rem);
+
+  --content-max: 68rem;
+  --content-narrow: 40rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Misc */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --shadow-subtle: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-3);
+}
+
+h4 {
+  font-size: var(--step-2);
+}
+
+p {
+  margin: 0 0 var(--space-md);
+  max-width: var(--content-narrow);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Layout primitives */
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-main {
+  flex: 1;
+}
+
+.wrap {
+  width: min(100% - var(--gutter) * 2, var(--content-max));
+  margin-inline: auto;
+}
+
+.stack-lg > * + * {
+  margin-top: var(--space-lg);
+}
+
+.stack-xl > * + * {
+  margin-top: var(--space-xl);
+}
+
+.prose {
+  font-size: var(--step-1);
+}
+
+.prose > * + * {
+  margin-top: var(--space-md);
+}
+
+/* Accent utilities — use rarely */
+.accent {
+  color: var(--color-accent);
+}
+
+.accent-bg {
+  background: var(--color-accent-soft);
+}
+
+.rule-accent {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    color-mix(in srgb, var(--color-accent) 15%, transparent)
+  );
+  margin: var(--space-xl) 0;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+
+.tag--accent {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Project grid */
+.project-grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+}

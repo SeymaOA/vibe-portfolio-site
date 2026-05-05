@@ -1,0 +1,51 @@
+---
+import ProjectCard from '@/components/ProjectCard.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Project one',
+    description:
+      'Placeholder: summarize the problem, your role, and the outcome in two sentences.',
+    status: 'Shipped',
+    tools: ['Astro', 'Netlify'],
+    href: '#',
+  },
+  {
+    title: 'Project two',
+    description:
+      'Placeholder: tools, scope, and status are easy to edit in this page frontmatter.',
+    status: 'In progress',
+    tools: ['Python', 'Data'],
+    href: '#',
+  },
+  {
+    title: 'Project three',
+    description:
+      'Placeholder: link “Learn more” to a case study or repo when you add detail pages.',
+    status: 'Experiment',
+    tools: ['UI', 'Research'],
+    href: '#',
+  },
+];
+---
+
+<BaseLayout title="Projects" description="Selected work and experiments.">
+  <SiteHeader />
+  <main class="page-main">
+    <div class="wrap stack-lg" style="padding-block: var(--space-3xl)">
+      <h1>Projects</h1>
+      <p class="prose" style="max-width: var(--content-narrow)">
+        Placeholder intro — frame how you choose work and what visitors should look for.
+      </p>
+      <div class="project-grid">
+        {projects.map((p) => (
+          <ProjectCard {...p} />
+        ))}
+      </div>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

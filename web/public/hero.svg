@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <rect width="900" height="1100" fill="#f7f7f7" />
+  <rect x="48" y="48" width="804" height="1004" stroke="#d90429" stroke-width="4" fill="none" />
+  <text
+    x="450"
+    y="520"
+    text-anchor="middle"
+    font-family="system-ui,sans-serif"
+    font-size="36"
+    fill="#404040"
+  >
+    Replace with your photo
+  </text>
+  <text
+    x="450"
+    y="575"
+    text-anchor="middle"
+    font-family="system-ui,sans-serif"
+    font-size="22"
+    fill="#737373"
+  >
+    Save as /public/hero.jpg and update Home hero src
+  </text>
+</svg>

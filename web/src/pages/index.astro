@@ -1,0 +1,107 @@
+---
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+/** Swap for a real photo in /public (e.g. hero.jpg) — matches Code Playbook video flow */
+const heroImage = '/hero.svg';
+
+const featured = [
+  {
+    title: 'Sample project alpha',
+    description:
+      'Short description placeholder — what it does, why it matters, one or two lines.',
+    status: 'In progress',
+    tools: ['Astro', 'TypeScript'],
+    href: '#',
+  },
+  {
+    title: 'Sample project beta',
+    description:
+      'Another placeholder card. Swap titles, copy, tags, and links when you are ready.',
+    status: 'Exploring',
+    tools: ['CSS', 'Design'],
+    href: '#',
+  },
+];
+---
+
+<BaseLayout
+  title="Home"
+  description="Bold, minimal portfolio — science, software, and weekly notes."
+  ogImage={heroImage}
+>
+  <SiteHeader />
+  <main class="page-main">
+    <div class="wrap px-4 sm:px-6 lg:px-8">
+      <section
+        class="grid gap-10 py-12 md:grid-cols-2 md:items-center md:gap-14 md:py-20 lg:py-24"
+        aria-labelledby="hero-heading"
+      >
+        <div class="stack-xl min-w-0">
+          <div class="border-l-4 border-[#d90429] pl-6">
+            <h1
+              id="hero-heading"
+              class="font-[family-name:var(--font-display)] text-4xl font-bold leading-tight tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
+            >
+              Hi — I’m <span class="text-[#d90429]">your name</span>.
+            </h1>
+            <p class="mt-6 max-w-xl font-[family-name:var(--font-body)] text-lg leading-relaxed text-neutral-600">
+              One-line identity placeholder. Replace with who you are and what you do (teaching,
+              science, software—whatever fits).
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a
+                href="/projects"
+                class="inline-flex items-center justify-center border-b-2 border-[#d90429] pb-0.5 font-[family-name:var(--font-display)] text-lg font-bold text-[#d90429] transition hover:text-[#b80321]"
+              >
+                View projects
+              </a>
+              <a
+                href="/about"
+                class="inline-flex items-center justify-center font-[family-name:var(--font-display)] text-lg font-semibold text-neutral-700 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-950"
+              >
+                About me
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="relative min-h-[280px] w-full md:min-h-[420px]">
+          <div
+            class="absolute inset-0 rounded-sm bg-neutral-100 ring-1 ring-neutral-200"
+            aria-hidden="true"
+          >
+          </div>
+          <img
+            src={heroImage}
+            alt=""
+            width={900}
+            height={1100}
+            class="relative z-[1] h-full w-full rounded-sm object-cover object-center shadow-sm"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </section>
+
+      <section class="stack-lg pb-16 md:pb-24" aria-labelledby="featured-heading">
+        <h2
+          id="featured-heading"
+          class="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl"
+        >
+          Featured projects
+        </h2>
+        <div class="project-grid">
+          {featured.map((p) => <ProjectCard {...p} titleLevel={3} />)}
+        </div>
+      </section>
+
+      <div class="pb-20 md:pb-28">
+        <NewsletterForm />
+      </div>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p class="site-footer__note">&copy; {year}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-3xl);
+    padding-block: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .site-footer__note {
+    margin: 0;
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+    max-width: none;
+  }
+</style>

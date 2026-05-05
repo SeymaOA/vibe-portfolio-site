@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap is emitted at build time when `site` is set in astro.config.mjs — typically:
+# https://YOUR-DOMAIN/sitemap-index.xml

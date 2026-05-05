@@ -1,0 +1,201 @@
+---
+/**
+ * If `PUBLIC_NEWSLETTER_ENDPOINT` is set, the form POSTs JSON:
+ * `{ "email": "...", "listId": "..." }` (Code Playbook / worker style).
+ * Otherwise shows a dev hint on submit (see AGENTS.md).
+ */
+interface Props {
+  heading?: string;
+  description?: string;
+}
+
+const {
+  heading = 'Newsletter',
+  description = 'Join the list—occasional updates, no spam. Connect your API in `.env` (see `.env.example`).',
+} = Astro.props;
+
+const endpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT ?? '';
+const listId = import.meta.env.PUBLIC_NEWSLETTER_LIST_ID ?? '';
+---
+
+<section class="newsletter" aria-labelledby="newsletter-heading">
+  <h2 id="newsletter-heading" class="newsletter__title">{heading}</h2>
+  <p class="newsletter__lede">{description}</p>
+
+  <form
+    class="newsletter__form"
+    method="post"
+    action="#"
+    data-newsletter-form
+    data-endpoint={endpoint}
+    data-list-id={listId}
+  >
+    <label class="newsletter__label" for="newsletter-email">Email</label>
+    <div class="newsletter__row">
+      <input
+        class="newsletter__input"
+        type="email"
+        id="newsletter-email"
+        name="email"
+        autocomplete="email"
+        inputmode="email"
+        required
+        placeholder="you@example.com"
+      />
+      <button class="newsletter__submit" type="submit">Subscribe</button>
+    </div>
+    <p class="newsletter__status" data-newsletter-status hidden></p>
+  </form>
+</section>
+
+<script is:inline>
+  (function () {
+    function formHandler(form) {
+      var status = form.querySelector('[data-newsletter-status]');
+      var endpoint = (form.getAttribute('data-endpoint') || '').trim();
+      var listId = (form.getAttribute('data-list-id') || '').trim();
+
+      form.addEventListener('submit', function (e) {
+        if (!endpoint) {
+          e.preventDefault();
+          if (status) {
+            status.hidden = false;
+            status.textContent =
+              'Add PUBLIC_NEWSLETTER_ENDPOINT to your .env file (copy from .env.example), then restart `npm run dev`.';
+          }
+          return;
+        }
+
+        e.preventDefault();
+        var input = form.querySelector('#newsletter-email');
+        var email = input && input.value ? input.value.trim() : '';
+        if (!email) return;
+
+        if (status) {
+          status.hidden = false;
+          status.textContent = 'Sending…';
+        }
+
+        var body = { email: email };
+        if (listId) {
+          body.listId = listId;
+        }
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Request failed');
+            return res.text();
+          })
+          .then(function () {
+            if (status) {
+              status.textContent = 'Thanks for subscribing—check your email to confirm if required.';
+            }
+            form.reset();
+          })
+          .catch(function () {
+            if (status) {
+              status.textContent = 'Something went wrong. Check the endpoint and try again.';
+            }
+          });
+      });
+    }
+
+    document.querySelectorAll('[data-newsletter-form]').forEach(formHandler);
+  })();
+</script>
+
+<style>
+  .newsletter {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-subtle);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .newsletter__title {
+    font-size: var(--step-3);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .newsletter__lede {
+    margin: 0 0 var(--space-lg);
+    max-width: 36rem;
+    font-size: var(--step-0);
+    color: var(--color-text-muted);
+  }
+
+  .newsletter__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .newsletter__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: stretch;
+  }
+
+  .newsletter__input {
+    flex: 1 1 14rem;
+    min-height: 2.75rem;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .newsletter__input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-color: var(--color-accent);
+  }
+
+  .newsletter__submit {
+    flex-shrink: 0;
+    min-height: 2.75rem;
+    padding: var(--space-sm) var(--space-lg);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .newsletter__submit:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .newsletter__submit:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .newsletter__status {
+    margin: var(--space-md) 0 0;
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+    max-width: 36rem;
+  }
+</style>

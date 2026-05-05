@@ -1,0 +1,16 @@
+---
+import SiteFooter from '@/components/SiteFooter.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About — background and mission.">
+  <SiteHeader />
+  <main class="page-main">
+    <div class="wrap stack-lg" style="padding-block: var(--space-3xl)">
+      <h1>About</h1>
+      <p class="prose">Placeholder: your story, teaching/science, software, mission.</p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>
