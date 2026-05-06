@@ -8,6 +8,10 @@ export interface ProjectCardProps {
   ctaLabel?: string;
   image?: string;
   imageAlt?: string;
+  images?: {
+    src: string;
+    alt: string;
+  }[];
   /** Use `3` under an `h2` section (e.g. featured on Home). Default `2` under page `h1`. */
   titleLevel?: 2 | 3;
 }
@@ -21,21 +25,27 @@ const {
   ctaLabel = 'Learn more',
   image,
   imageAlt = '',
+  images,
   titleLevel = 2,
 } = Astro.props as ProjectCardProps;
 
 const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
+const galleryImages = images ?? (image ? [{ src: image, alt: imageAlt }] : []);
 ---
 
 <article class="project-card">
-  {image && (
-    <img
-      class="project-card__image"
-      src={image}
-      alt={imageAlt}
-      loading="lazy"
-      decoding="async"
-    />
+  {galleryImages.length > 0 && (
+    <div class="project-card__gallery">
+      {galleryImages.map((item) => (
+        <img
+          class="project-card__image"
+          src={item.src}
+          alt={item.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+    </div>
   )}
   <div class="project-card__top">
     <TitleTag class="project-card__title">{title}</TitleTag>
@@ -69,6 +79,17 @@ const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
   .project-card:hover {
     border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .project-card__gallery {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .project-card__gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .project-card__image {

@@ -11,8 +11,16 @@ const projects = [
       'A desktop pet care management app built with Java Swing and an Apache Derby database. The app stores pet and owner details, connects to a local database, and supports manually adding and viewing animal records.',
     status: 'Shipped',
     tools: ['Java Swing', 'Apache Derby', 'SQL', 'Eclipse'],
-    image: '/petcare-database.png',
-    imageAlt: 'PetCare App database table open in Eclipse with animal records',
+    images: [
+      {
+        src: '/petcare-login.png',
+        alt: 'PetCare App login screen with username and password fields',
+      },
+      {
+        src: '/petcare-dashboard.png',
+        alt: 'PetCare App main screen with pet list, selected pet details, and notes',
+      },
+    ],
     href: '#',
   },
   {
