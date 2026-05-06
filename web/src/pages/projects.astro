@@ -6,11 +6,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const projects = [
   {
-    title: 'Project one',
+    title: 'PetCare App',
     description:
-      'Placeholder: summarize the problem, your role, and the outcome in two sentences.',
+      'A desktop pet care management app built with Java Swing and an Apache Derby database. The app stores pet and owner details, connects to a local database, and supports manually adding and viewing animal records.',
     status: 'Shipped',
-    tools: ['Astro', 'Netlify'],
+    tools: ['Java Swing', 'Apache Derby', 'SQL', 'Eclipse'],
+    image: '/petcare-database.png',
+    imageAlt: 'PetCare App database table open in Eclipse with animal records',
     href: '#',
   },
   {
@@ -38,7 +40,7 @@ const projects = [
     <div class="wrap stack-lg" style="padding-block: var(--space-3xl)">
       <h1>Projects</h1>
       <p class="prose" style="max-width: var(--content-narrow)">
-        Placeholder intro — frame how you choose work and what visitors should look for.
+        Selected projects from my work in software engineering, education, and science.
       </p>
       <div class="project-grid">
         {projects.map((p) => (

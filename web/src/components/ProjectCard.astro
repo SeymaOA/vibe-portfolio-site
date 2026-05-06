@@ -6,6 +6,8 @@ export interface ProjectCardProps {
   tools: string[];
   href?: string;
   ctaLabel?: string;
+  image?: string;
+  imageAlt?: string;
   /** Use `3` under an `h2` section (e.g. featured on Home). Default `2` under page `h1`. */
   titleLevel?: 2 | 3;
 }
@@ -17,6 +19,8 @@ const {
   tools,
   href = '#',
   ctaLabel = 'Learn more',
+  image,
+  imageAlt = '',
   titleLevel = 2,
 } = Astro.props as ProjectCardProps;
 
@@ -24,6 +28,15 @@ const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
 ---
 
 <article class="project-card">
+  {image && (
+    <img
+      class="project-card__image"
+      src={image}
+      alt={imageAlt}
+      loading="lazy"
+      decoding="async"
+    />
+  )}
   <div class="project-card__top">
     <TitleTag class="project-card__title">{title}</TitleTag>
     <span class="project-card__status">{status}</span>
@@ -56,6 +69,16 @@ const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
   .project-card:hover {
     border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .project-card__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: left top;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-muted);
   }
 
   .project-card__top {
