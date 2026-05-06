@@ -9,9 +9,25 @@ Use this file so AI assistants (and future you) stay aligned with the **Code Pla
 - **Fonts:** Fontshare — Khand (display) + Switzer (body), linked in `src/layouts/BaseLayout.astro`.
 - **SEO:** Meta + Open Graph / Twitter in `BaseLayout`; `@astrojs/sitemap` (needs real `site` in `astro.config.mjs`).
 
-## Repo layout
+## Repo layout (instructor-style root folder)
 
-- Astro app lives in **`web/`** (not the repo root). On **Cloudflare Pages**, set **Root directory** to `web`, **Build command** `npm run build`, **Output** `dist`.
+- **Open `VIBE-PORTFOLIO-SITE` in Cursor** — same idea as the video’s `vibe-portfolio-site` folder (git + `gh` run here).
+- The **Astro app** still lives in **`web/`** (source, `astro.config.mjs`, `src/`, etc.).
+- From the **repo root**, run **`npm install`** once, then **`npm run dev`** / **`npm run build`** — scripts delegate to Astro in `web/` via `scripts/run-astro.mjs` (works even when PowerShell blocks `npm.ps1`).
+
+### Cloudflare Pages
+
+**Option A — build from repo root (matches “main folder” mental model)**
+
+- **Root directory:** `/` (empty / repository root)  
+- **Build command:** `npm install && npm run build`  
+- **Output directory:** `web/dist`
+
+**Option B — build only the app folder**
+
+- **Root directory:** `web`  
+- **Build command:** `npm install && npm run build`  
+- **Output directory:** `dist`
 
 ## What you must configure
 
@@ -28,9 +44,9 @@ Use this file so AI assistants (and future you) stay aligned with the **Code Pla
 |------|--------|
 | Astro + pages (Home, About, Projects) | Done |
 | Tailwind installed | Done |
-| Local preview (`npm run dev`) | You run |
+| Local preview (`npm run dev` from **repo root**) | You run |
 | Git + GitHub | Local repo + `main` branch done — **you** run `gh auth login` + create remote (below) |
-| Cloudflare Pages + Git connect | Use dashboard; root `web`, output `dist` |
+| Cloudflare Pages + Git connect | Use dashboard; **Option A or B** above |
 | Newsletter wired to API | Set env vars above |
 | Image in `public/` + hero | Placeholder SVG + swap path |
 | Deploy / live URL | After `site` + hosting |
@@ -67,7 +83,7 @@ An automated assistant **cannot** log into your GitHub account or push without y
 
 **Cloudflare Pages** must be connected in the Cloudflare dashboard (import Git repository). No one can do that for your account without your Cloudflare login.
 
-## Scripts
+## Scripts (run from `VIBE-PORTFOLIO-SITE`, not `web`)
 
 ```bash
 npm install
@@ -75,3 +91,6 @@ npm run dev
 npm run build
 npm run preview
 ```
+
+If PowerShell blocks `npm`, use Command Prompt or:  
+`& "C:\Program Files\nodejs\npm.cmd" run dev`

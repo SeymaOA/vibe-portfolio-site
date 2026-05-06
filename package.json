@@ -1,0 +1,14 @@
+{
+  "name": "vibe-portfolio-root",
+  "private": true,
+  "description": "Open this folder in Cursor (instructor-style). Astro lives in web/; run all commands from here.",
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "dev": "node scripts/run-astro.mjs dev",
+    "build": "node scripts/run-astro.mjs build",
+    "preview": "node scripts/run-astro.mjs preview",
+    "start": "node scripts/run-astro.mjs dev"
+  }
+}
