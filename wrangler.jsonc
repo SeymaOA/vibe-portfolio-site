@@ -1,0 +1,7 @@
+{
+  "name": "vibe-portfolio-site",
+  "compatibility_date": "2026-05-06",
+  "assets": {
+    "directory": "./web/dist"
+  }
+}
