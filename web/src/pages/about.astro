@@ -4,13 +4,69 @@ import SiteHeader from '@/components/SiteHeader.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About" description="About — background and mission.">
+<BaseLayout
+  title="About"
+  description="About Seyma Aguilar, science teacher, chemist, and software engineering student."
+>
   <SiteHeader />
   <main class="page-main">
-    <div class="wrap stack-lg" style="padding-block: var(--space-3xl)">
-      <h1>About</h1>
-      <p class="prose">Placeholder: your story, teaching/science, software, mission.</p>
+    <div class="wrap" style="padding-block: var(--space-3xl)">
+      <section class="about-grid" aria-labelledby="about-heading">
+        <div class="stack-lg">
+          <h1 id="about-heading">About</h1>
+          <div class="prose stack-md">
+            <p>
+              I am a multilingual science and technology professional whose journey began in
+              Istanbul and continued in the United States. My background in chemistry, biology,
+              math, and physics gives me a strong foundation for solving problems with both
+              curiosity and discipline.
+            </p>
+            <p>
+              As a woman born and raised in Turkey, I have learned to turn challenges into growth
+              through determination, adaptability, and resilience. I currently work as a chemist
+              while studying software engineering part time as a double major.
+            </p>
+            <p>
+              My long-term goal is to continue my education through master's and doctoral studies
+              at Ferris State University, combining science, education, and software to build
+              meaningful solutions.
+            </p>
+          </div>
+        </div>
+        <img
+          src="/seyma-about.jpg"
+          alt="Portrait of Seyma Aguilar"
+          width="400"
+          height="400"
+          class="about-photo"
+          loading="eager"
+          decoding="async"
+        />
+      </section>
     </div>
   </main>
   <SiteFooter />
 </BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .about-photo {
+    width: min(100%, 26rem);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (min-width: 48rem) {
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+    }
+  }
+</style>
