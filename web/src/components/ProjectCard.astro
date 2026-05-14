@@ -31,8 +31,11 @@ const {
 
 const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
 const galleryImages = images ?? (image ? [{ src: image, alt: imageAlt }] : []);
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 const withBase = (path: string) =>
-  path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}` : path;
+  path.startsWith('/') ? `${base}${path.replace(/^\//, '')}` : path;
 ---
 
 <article class="project-card">

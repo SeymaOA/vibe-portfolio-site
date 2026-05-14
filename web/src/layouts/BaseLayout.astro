@@ -9,7 +9,10 @@ interface Props {
 }
 
 const { title, description = 'Portfolio — bold, minimal.', ogImage = '/hero.svg' } = Astro.props;
-const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = canonical.href;
 const socialImage = new URL(withBase(ogImage), Astro.site).href;
