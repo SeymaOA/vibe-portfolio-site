@@ -15,8 +15,8 @@ const link = (href: string) => (activePath === href ? 'nav__link is-active' : 'n
     <a class="site-header__mark" href={withBase('/')}>Portfolio</a>
     <nav class="nav" aria-label="Primary">
       <a class={link('/')} href={withBase('/')}>Home</a>
-      <a class={link('/about')} href={withBase('/about')}>About</a>
-      <a class={link('/projects')} href={withBase('/projects')}>Projects</a>
+      <a class={link('/about')} href={withBase('/about/')}>About</a>
+      <a class={link('/projects')} href={withBase('/projects/')}>Projects</a>
     </nav>
   </div>
 </header>

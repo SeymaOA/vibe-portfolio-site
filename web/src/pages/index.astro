@@ -18,7 +18,7 @@ const featured = [
       'A Java Swing desktop app with an Apache Derby database for storing pet and owner records.',
     status: 'Shipped',
     tools: ['Java Swing', 'Apache Derby'],
-    href: '/projects',
+    href: '/projects/',
   },
   {
     title: 'NASA Mission Dashboard',
@@ -26,7 +26,7 @@ const featured = [
       'A Java Swing app that loads NASA APOD data, saves favorite entries, and calculates moon travel time.',
     status: 'Built',
     tools: ['Java Swing', 'NASA API'],
-    href: '/projects',
+    href: '/projects/',
   },
 ];
 ---
@@ -56,13 +56,13 @@ const featured = [
             </p>
             <div class="mt-8 flex flex-wrap gap-4">
               <a
-                href={withBase('/projects')}
+                href={withBase('/projects/')}
                 class="inline-flex items-center justify-center border-b-2 border-[#d90429] pb-0.5 font-[family-name:var(--font-display)] text-lg font-bold text-[#d90429] transition hover:text-[#b80321]"
               >
                 View projects
               </a>
               <a
-                href={withBase('/about')}
+                href={withBase('/about/')}
                 class="inline-flex items-center justify-center font-[family-name:var(--font-display)] text-lg font-semibold text-neutral-700 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-950"
               >
                 About me
