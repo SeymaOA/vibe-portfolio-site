@@ -6,6 +6,7 @@ import SiteHeader from '@/components/SiteHeader.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const heroImage = '/seyma-about.jpg';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
 const featured = [
   {
@@ -52,13 +53,13 @@ const featured = [
             </p>
             <div class="mt-8 flex flex-wrap gap-4">
               <a
-                href="/projects"
+                href={withBase('/projects')}
                 class="inline-flex items-center justify-center border-b-2 border-[#d90429] pb-0.5 font-[family-name:var(--font-display)] text-lg font-bold text-[#d90429] transition hover:text-[#b80321]"
               >
                 View projects
               </a>
               <a
-                href="/about"
+                href={withBase('/about')}
                 class="inline-flex items-center justify-center font-[family-name:var(--font-display)] text-lg font-semibold text-neutral-700 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-950"
               >
                 About me
@@ -73,7 +74,7 @@ const featured = [
           >
           </div>
           <img
-            src={heroImage}
+            src={withBase(heroImage)}
             alt="Portrait of Seyma"
             width={900}
             height={1100}

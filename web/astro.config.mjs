@@ -7,7 +7,8 @@ import { defineConfig } from 'astro/config';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  site: 'https://example.com',
+  site: process.env.GITHUB_PAGES ? 'https://seymaoa.github.io' : 'https://example.com',
+  base: process.env.GITHUB_PAGES ? '/vibe-portfolio-site' : '/',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

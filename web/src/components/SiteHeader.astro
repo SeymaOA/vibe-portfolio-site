@@ -1,15 +1,19 @@
 ---
 const path = Astro.url.pathname;
-const link = (href: string) => (path === href ? 'nav__link is-active' : 'nav__link');
+const withBase = (href: string) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+const normalizedPath = path.replace(/\/$/, '') || '/';
+const normalizedBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+const activePath = normalizedPath.replace(normalizedBase, '') || '/';
+const link = (href: string) => (activePath === href ? 'nav__link is-active' : 'nav__link');
 ---
 
 <header class="site-header">
   <div class="wrap site-header__inner">
-    <a class="site-header__mark" href="/">Portfolio</a>
+    <a class="site-header__mark" href={withBase('/')}>Portfolio</a>
     <nav class="nav" aria-label="Primary">
-      <a class={link('/')} href="/">Home</a>
-      <a class={link('/about')} href="/about">About</a>
-      <a class={link('/projects')} href="/projects">Projects</a>
+      <a class={link('/')} href={withBase('/')}>Home</a>
+      <a class={link('/about')} href={withBase('/about')}>About</a>
+      <a class={link('/projects')} href={withBase('/projects')}>Projects</a>
     </nav>
   </div>
 </header>

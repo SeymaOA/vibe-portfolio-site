@@ -31,6 +31,8 @@ const {
 
 const TitleTag = titleLevel === 3 ? 'h3' : 'h2';
 const galleryImages = images ?? (image ? [{ src: image, alt: imageAlt }] : []);
+const withBase = (path: string) =>
+  path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}` : path;
 ---
 
 <article class="project-card">
@@ -39,7 +41,7 @@ const galleryImages = images ?? (image ? [{ src: image, alt: imageAlt }] : []);
       {galleryImages.map((item) => (
         <img
           class="project-card__image"
-          src={item.src}
+          src={withBase(item.src)}
           alt={item.alt}
           loading="lazy"
           decoding="async"
@@ -59,7 +61,7 @@ const galleryImages = images ?? (image ? [{ src: image, alt: imageAlt }] : []);
       </li>
     ))}
   </ul>
-  <a class="project-card__cta" href={href}>{ctaLabel}</a>
+  <a class="project-card__cta" href={withBase(href)}>{ctaLabel}</a>
 </article>
 
 <style>
